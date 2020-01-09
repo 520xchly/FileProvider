@@ -1,0 +1,62 @@
+PowerShell
+入门cmdlet命令：(谓词-名词系列)，有些命令可能不存在，有些谓词和名词可进行简写，大小写一样的。
+查看所有进程： 		get-process
+查看所有windows服务：	get-service
+获取系统日期：		get-date
+查看使用指定谓词的所有命令：	get-command -verb get (例如查看有get谓词的所有命令)
+查看使用指定名词的所有命令：	get-command -noun command (例如查看有command名词的所有命令)
+模糊匹配查找：		get-command -name *abc
+清空powershell屏幕：	(cls|clear) -> clear-host
+显示别名对应的真正cmdlet命令：	get-alias cls （如上面）
+创建自己的别名对应真正的命令：	set-alias -name qingkong -value clear-host
+查看某个命令或函数的使用帮助：	get-help get-process 或者 get-process -?
+获取某个脚本的帮助文章：	get-help c:\test\testsc.ps1    (是数字1)
+显示当期那会话可用命令：	get-command
+获取当前路径：		get-location
+stop-computer
+restart-computer
+restart-computer -force
+get-process -id [pid]
+查看名称以a开头的进程：	Get-Process -Name a*
+扩展(多值匹配)：		Get-Process -Name a*,b*
+stop-process -name abc
+get-service -name a*
+get-service -displayname a*
+stop-service -name abc
+start-service -name abc
+获取驱动器列表：	get-psdrive
+创建一个驱动器： New-PSDrive -Name Office -PSProvider FileSystem -Root "C:\Program Files\Microsoft Office\OFFICE11"
+{
+创建一个名为“Office”的驱动器，它将映射到 C:\Program Files\Microsoft Office\OFFICE11。只适用于当前会话的驱动器，要永久的话自行扩展。
+}
+进入到这个驱动器：cd office:
+(get-childitem -path f:\ ).count   查询数量
+
+变量：
+定义变量：	$loc = 2 
+再次输入 $loc 即可显示值
+查看可操作变量的命令：	get-command -noun variable
+指定显示格式：		get-command -noun variable | Format-Table -Property Name,Definition -AutoSize -Wrap	
+显示系统变量：	get-variable
+删除当前会话不受powershell控制的变量：Remove-Variable -Name * -Force -ErrorAction SilentlyContinue
+还可以查看和修改增加电脑的环境变量... ( Get-ChildItem env: )   自行扩展
+
+管道 |: 将上一个命令的结果直接用于下一命令。
+逐页显示来自于另一个命令的输出：	Get-ChildItem -Path C:\WINDOWS\System32 | Out-Host -Paging
+查看上衣命令返回的对象信息：	get-location | get-member
+
+执行脚本：
+输入脚本的路径即可。
+或者cmd中输入：  powershell -file "fullpath"
+如果被禁止执行脚本，输入： set-executionpolicy Unrestricted 
+有4种策略：get-executionpolicy 
+Restricted： 禁止运行任何脚本和配置文件。
+AllSigned ：可以运行脚本，但要求所有脚本和配置文件由可信发布者签名，包括在本地计算机上编写的脚本。
+RemoteSigned ：可以运行脚本，但要求从网络上下载的脚本和配置文件由可信发布者签名；
+不要求对已经运行和已在本地计算机编写的脚本进行数字签名。
+Unrestricted ：可以运行未签名脚本。（危险！）  
+
+重定向：
+将内容保存到文件：> 覆盖  >> 追加
+"123" >> 123.txt
+显示文件内容：get-content .\123.txt
