@@ -1,4 +1,4 @@
-# FileProvider ![项目类型](https://img.shields.io/badge/项目类型-类库-brightgreen.svg?style=plastic) ![开发语言](https://img.shields.io/badge/开发语言-C%23-brightgreen.svg?style=plastic) ![目标框架](https://img.shields.io/badge/目标框架-.NetCore%202.2-brightgreen.svg?style=plastic)  
+# FileProvider ![项目类型](https://img.shields.io/badge/项目类型-Asp.Net%20Core%20WebApi-brightgreen.svg?style=plastic) ![开发语言](https://img.shields.io/badge/开发语言-C%23-brightgreen.svg?style=plastic) ![目标框架](https://img.shields.io/badge/目标框架-.NetCore%202.2-brightgreen.svg?style=plastic)  
   
 文件提供服务，支持多文件上传，文件下载及一些图片的处理  
   
