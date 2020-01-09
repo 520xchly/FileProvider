@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        function doUpload() {
+            var formData = new FormData($("#uploadForm")[0]);
+            $.ajax({
+                url: window.origin + '/api/values/upload?guid=1234567890',
+                type: 'POST',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success: function (returndata) {
+                    alert(returndata);
+                },
+                error: function (returndata) {
+                    alert(returndata);
+                }
+            });
+        }</script>
+
+</head>
+<body>
+    <h1>Index</h1>
+    <img src="~/api/values/getmyimage" />
+    <img src="~/api/values/getimg64" />
+    <a href="~/api/values/downloadfile">下载文件</a>
+
+    @* 多文件上传 *@
+    <form id="uploadForm" enctype="multipart/form-data">
+        <p>指定文件名： <input type="text" name="filename" value="" /></p>
+        <p>上传文件： <input type="file" name="files" multiple /></p>
+        <p>上传文件2： <input type="file" name="file2" /></p>
+        <input type="button" value="上传" onclick="doUpload()" />
+    </form>
+</body>
+
+</html>
